@@ -1,18 +1,17 @@
 package cn.cust.eshop.inventory.dao.impl;
 
-import javax.annotation.Resource;
-
 import cn.cust.eshop.inventory.dao.RedisDAO;
 import org.springframework.stereotype.Repository;
+import redis.clients.jedis.Jedis;
 
-import redis.clients.jedis.JedisCluster;
+import javax.annotation.Resource;
 
 
 @Repository("redisDAO")
 public class RedisDAOImpl implements RedisDAO {
 
 	@Resource
-	private JedisCluster jedisCluster;
+	private Jedis jedisCluster;
 	
 	@Override
 	public void set(String key, String value) {

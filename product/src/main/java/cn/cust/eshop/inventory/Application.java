@@ -1,8 +1,5 @@
 package cn.cust.eshop.inventory;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -16,14 +13,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-
-import redis.clients.jedis.HostAndPort;
-import redis.clients.jedis.JedisCluster;
+import redis.clients.jedis.Jedis;
 
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan
-@MapperScan("com.roncoo.eshop.inventory.mapper")
+@MapperScan("cn.cust.eshop.inventory.mapper")
 public class Application {
  
     @Bean
@@ -46,15 +41,23 @@ public class Application {
         return new DataSourceTransactionManager(dataSource());
     }
     
+//    @Bean
+//	public JedisCluster JedisClusterFactory() {
+//		Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
+//		jedisClusterNodes.add(new HostAndPort("47.93.23.61", 6379));
+////		jedisClusterNodes.add(new HostAndPort("192.168.31.19", 7004));
+////		jedisClusterNodes.add(new HostAndPort("192.168.31.227", 7006));
+//		JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes);
+//		jedisCluster.auth("cn.cust");
+//		return jedisCluster;
+//	}
+
     @Bean
-	public JedisCluster JedisClusterFactory() {
-		Set<HostAndPort> jedisClusterNodes = new HashSet<HostAndPort>();
-		jedisClusterNodes.add(new HostAndPort("192.168.31.19", 7003));
-		jedisClusterNodes.add(new HostAndPort("192.168.31.19", 7004));
-		jedisClusterNodes.add(new HostAndPort("192.168.31.227", 7006));
-		JedisCluster jedisCluster = new JedisCluster(jedisClusterNodes);
-		return jedisCluster;
-	}
+    public Jedis jedisClusterFactory() {
+        Jedis jedis = new Jedis("47.93.23.61",6379);
+        jedis.auth("cn.cust");
+        return jedis;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

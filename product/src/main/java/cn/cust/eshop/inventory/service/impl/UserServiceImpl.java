@@ -2,13 +2,14 @@ package cn.cust.eshop.inventory.service.impl;
 
 import javax.annotation.Resource;
 
+import cn.cust.eshop.inventory.dao.RedisDAO;
+import cn.cust.eshop.inventory.mapper.UserMapper;
+import cn.cust.eshop.inventory.model.User;
+import cn.cust.eshop.inventory.service.UserService;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.roncoo.eshop.inventory.dao.RedisDAO;
-import com.roncoo.eshop.inventory.mapper.UserMapper;
-import com.roncoo.eshop.inventory.model.User;
-import com.roncoo.eshop.inventory.service.UserService;
+
 
 /**
  * 用户Service实现类
