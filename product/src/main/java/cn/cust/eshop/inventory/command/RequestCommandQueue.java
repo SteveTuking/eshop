@@ -51,4 +51,21 @@ public class RequestCommandQueue {
         commands.add(command);
     }
 
+    /**
+     * 获取内存队列的数量
+     * @return
+     */
+    public int queueSize() {
+        return commands.size();
+    }
+
+    /**
+     * 获取内存队列
+     * @param index
+     * @return
+     */
+    public ArrayBlockingQueue<RequestCommand> getQueue(int index) {
+        return commands.get(index);
+    }
 }
+

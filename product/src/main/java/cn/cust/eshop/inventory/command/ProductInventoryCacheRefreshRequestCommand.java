@@ -25,7 +25,12 @@ public class ProductInventoryCacheRefreshRequestCommand implements RequestComman
 		this.productId = productId;
 		this.productInventoryService = productInventoryService;
 	}
-	
+
+	@Override
+	public Integer getProductId() {
+		return productId;
+	}
+
 	@Override
 	public void process() {
 		// 从数据库中查询最新的商品库存数量

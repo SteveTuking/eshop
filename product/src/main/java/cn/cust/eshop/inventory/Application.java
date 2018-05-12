@@ -1,6 +1,5 @@
 package cn.cust.eshop.inventory;
 
-import cn.cust.eshop.inventory.command.RequestCommandQueue;
 import cn.cust.eshop.inventory.listener.InitListener;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -17,8 +16,6 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import redis.clients.jedis.Jedis;
-
-import java.io.Serializable;
 
 @EnableAutoConfiguration
 @SpringBootApplication
