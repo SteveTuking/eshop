@@ -33,7 +33,12 @@ public class ProductInventoryDBUpdateRequestCommand implements RequestCommand {
 		this.productInventory = productInventory;
 		this.productInventoryService = productInventoryService;
 	}
-	
+
+	@Override
+	public Integer getProductId() {
+		return productInventory.getProductId();
+	}
+
 	@Override
 	public void process() {
 		// 删除redis中的缓存

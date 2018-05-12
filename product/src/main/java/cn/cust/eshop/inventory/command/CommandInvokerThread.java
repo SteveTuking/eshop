@@ -20,6 +20,7 @@ public class CommandInvokerThread implements Callable<Boolean> {
         try {
             while(true){
                 RequestCommand request = commands.take();
+                System.out.println("===========日志===========: 工作线程处理请求，商品id=" + request.getProductId());
                 // 执行这个request操作
                 request.process();
             }

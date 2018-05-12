@@ -29,19 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 如果是不一致的情况，可能会出现说redis中还是库存为100，但是数据库中也许已经更新成了库存为99了
  * 
  * 现在做了一致性保障的方案之后，就可以保证说，数据是一致的
- * 
- * 最后说一点点
- * 
- * 包括这个方案在内，还有后面的各种解决方案，首先都是针对我自己遇到过的特殊场景去设计的
- * 
- * 可能这个方案就不一定完全100%适合其他的场景，也许还要做一些改造才可以，本来你学习一个课程，它就不是万能的，你可能需要嚼烂了，吸收了，改造了，才能应用到自己的场景中
- * 
- * 另外一个，也有一种可能，就是说方案比较复杂，即使我之前做过，也许有少数细节我疏忽了，没有在课程里面讲解，导致解决方案有一些漏洞或者bug
- * 
- * 我讲解方案，主要是讲解架构思想，或者是设计思想，技术思想，有些许漏洞，希望大家谅解
- * 
- * 课程真正最重要的，不是给你一套100%包打天下的代码，而是告诉一种设计思想，多种设计思想组合起来，就是某种架构思想
- * 
  */
 @Controller
 public class ProductInventoryController {
@@ -103,6 +90,7 @@ public class ProductInventoryController {
 
 				// 如果读取到了结果，那么就返回
 				if(productInventory != null) {
+					System.out.println("===========日志===========: 在200ms内读取到了redis中的库存缓存，商品id=" + productInventory.getProductId() + ", 商品库存数量=" + productInventory.getInventoryCnt());
 					return productInventory;
 				}
 
@@ -117,6 +105,7 @@ public class ProductInventoryController {
 			// 直接尝试从数据库中读取数据
 			productInventory = productInventoryService.findProductInventory(productId);
 			if(productInventory != null) {
+				productInventoryService.setProductInventoryCache(productInventory);
 				return productInventory;
 			}
 		} catch (Exception e) {
