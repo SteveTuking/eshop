@@ -105,6 +105,7 @@ public class ProductInventoryController {
 			// 直接尝试从数据库中读取数据
 			productInventory = productInventoryService.findProductInventory(productId);
 			if(productInventory != null) {
+				//没有串行化
 				productInventoryService.setProductInventoryCache(productInventory);
 				return productInventory;
 			}
