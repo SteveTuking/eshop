@@ -17,6 +17,15 @@ public class CommandInvokerThread implements Callable<Boolean> {
 
     @Override
     public Boolean call() throws Exception {
-        return null;
+        try {
+            while(true){
+                RequestCommand request = commands.take();
+                // 执行这个request操作
+                request.process();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return true;
     }
 }
